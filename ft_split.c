@@ -1,23 +1,4 @@
 #include "pipex.h"
-
-static char	*ft_strndup(char const *str, int n)
-{
-	char	*new;
-	int		i;
-
-	new = (char *) malloc((n + 1) * sizeof(char));
-	if (!new)
-		return (0);
-	i = 0;
-	while (i < n && str[i])
-	{
-		new[i] = str[i];
-		i++;
-	}
-	new[i] = 0;
-	return (new);
-}
-
 static int	count_elements(char const *str, char c)
 {
 	int	i;
