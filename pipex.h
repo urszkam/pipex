@@ -15,5 +15,6 @@ char    **create_arr(char *str, char *str2);
 char    *create_path(char *cmd);
 
 void    free_array(char **arr);
+void    pipex(char **cmd, int cmd_len);
 
 #endif
