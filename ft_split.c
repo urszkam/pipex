@@ -1,4 +1,5 @@
 #include "pipex.h"
+
 static int	count_elements(char const *str, char c)
 {
 	int	i;
