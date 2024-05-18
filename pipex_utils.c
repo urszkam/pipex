@@ -29,7 +29,7 @@ char    **create_cmd_vector(char *cmd, int j)
 
 void    open_fds(int *fd, int j, int cmd_len, int output_fd)
 {
-    if (j + 4 < 2 * cmd_len)
+    if (j + 2 < 2 * cmd_len)
     {
         if (dup2(fd[j + 1], 1) < 0)
         {
@@ -45,7 +45,7 @@ void    open_fds(int *fd, int j, int cmd_len, int output_fd)
             exit(EXIT_FAILURE);
         }
     }
-    if (j + 4 == 2 * cmd_len)
+    if (j + 2 == 2 * cmd_len)
     {
         if (dup2(output_fd, 1) < 0)
         {
@@ -60,19 +60,16 @@ void    exec_cmd(char *cmd, int j)
     char    **cmdv;
     char    *path;
 
-    cmdv = create_cmd_vector(cmd, j); 
+    cmdv = create_cmd_vector(cmd, j);
     if (j == 0)
-        path = "/usr/bin/cat";
+        path = ft_strndup("/usr/bin/cat", 15);
     else 
         path = create_path(cmdv[0]);
-    fprintf(stderr, "%s, %s, %d\n", path, cmdv[0], j);
     if (execve(path, cmdv, NULL) < 0)
     {
+        perror(cmd);
         free(path);
         free_array(cmdv);
-        perror("command execution");
         exit(EXIT_FAILURE);
     }
-    free_array(cmdv);
-    free(path);
 }
