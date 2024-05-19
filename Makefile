@@ -14,7 +14,7 @@ HEADER = ./
 	@$(CC) $(CFLAGS) -I $(HEADER) -c $< -o $@
 
 $(NAME): $(OBJS)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+	@$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
 
 all: $(NAME)
 
