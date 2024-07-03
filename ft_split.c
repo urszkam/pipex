@@ -2,33 +2,37 @@
 
 static int	count_elements(char const *str, char c)
 {
-	int	i;
-	int	string_counter;
-	int	is_word_last;
-	int	res;
+	int	counter;
+	int	in_quotes;
 
-	i = 1;
-	string_counter = 0;
-	if (!str[0])
+	if (!*str)
 		return (0);
-	while (str[i])
+	counter = 0;
+	in_quotes = 0;
+	while (*str)
 	{
-		if (str[i] == c && str[i - 1] != c)
-			string_counter++;
-		i++;
+		if (*str == '\'')
+			in_quotes = !in_quotes;
+		else if (*str && (*str == c && !in_quotes))
+			counter++;
+		str++;
 	}
-	is_word_last = str[i - 1] != c;
-	res = string_counter + is_word_last;
-	return (res);
+	return (counter + (*(--str) != c));
 }
 
 static int	calc_len(char const *str, char c)
 {
 	int	i;
+	int	in_quotes;
 
 	i = 0;
-	while (str[i] && str[i] != c)
+	in_quotes = 0;
+	while (str[i])
 	{
+		if (str[i] == '\'')
+			in_quotes = !in_quotes;
+		else if (str[i] == c && !in_quotes)
+			break ;
 		i++;
 	}
 	return (i);
